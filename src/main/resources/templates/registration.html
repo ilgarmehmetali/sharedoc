@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div th:insert="~{header :: header}"></div>
+
+
+<section layout:fragment="content">
+
+    <h2>Create your account</h2>
+
+    <form method="POST" th:action="@{/registration}" th:object="${registrationRequest}">
+        <div class="form-group">
+            <label for="username">User name</label>
+            <input th:field="*{user.username}" type="text" class="form-control" id="username" aria-describedby="username" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label for="displayName">Display name</label>
+            <input th:field="*{user.displayName}" type="text" class="form-control" id="displayName" aria-describedby="displayName" placeholder="Enter display name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input th:field="*{user.email}" type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input th:field="*{user.password}" type="password" class="form-control" id="password" placeholder="Password (min 8 characters)">
+        </div>
+        <div class="form-group">
+            <label for="passwordConfirm">Password</label>
+            <input th:field="*{user.passwordConfirm}" type="password" class="form-control" id="passwordConfirm" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="role">Account Type</label>
+            <select class="form-control" id="role" th:field="*{role}">
+                <option th:value="'student'" th:text="Student"></option>
+                <option th:value="'teacher'" th:text="Teacher"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</section>
+</div>
+</body>
+</html>

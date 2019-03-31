@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+
+<body>
+<div class="col-sm-2 px-1 bg-dark" style="height:100vh;" th:fragment="sidebar">
+    <div class="py-2 sticky-top flex-grow-1">
+        <div class="nav flex-sm-column text-light">
+            <a class="nav-link text-light" th:href="@{/}">Home</a>
+            <div style="background-color: rgba(0,0,0,0.1)">
+                <div layout:fragment="pageLinks">
+
+                </div>
+            </div>
+            <span sec:authorize="isAuthenticated()">
+                <span sec:authorize="hasAuthority('student')">
+                <span class="nav-link text-light" th:text="|Classes(attending)|"/>
+                <ul>
+                    <li th:each="termClass : ${currentUser.getClasses()}">
+                        <a class="text-light" th:text="${termClass.name}" th:href="@{'/classes/' + ${termClass.id}}"/>
+                    </li>
+                    <li><a class="nav-link text-light" th:text="|Join a class|"
+                           th:href="@{'/classes/join'}"/></li>
+                </ul>
+                </span>
+                <span sec:authorize="hasAuthority('teacher')">
+                <span class="nav-link text-light" th:text="|Classes(created)|"/>
+                <ul>
+                    <li th:each="termClass : ${currentUser.getCreatedClasses()}">
+                        <a class="text-light" th:text="${termClass.name}" th:href="@{'/classes/' + ${termClass.id}}"/>
+                    </li>
+                    <li><a class="nav-link text-light" th:text="|Create|"
+                           th:href="@{'/classes/create'}"/></li>
+                </ul>
+                </span>
+
+                <span class="nav-link text-light" th:text="${currentUser.username}"/>
+                <a class="nav-link text-light" th:href="@{/logout}">Logout</a>
+            </span>
+            <span sec:authorize="!isAuthenticated()">
+                <a class="nav-link text-light" th:href="@{/login}">Login</a>
+                <a class="nav-link text-light" th:href="@{/registration}">Register</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<div th:fragment="termClassSpecificPageLinks">
+    <a class="nav-link text-light" th:text="${currentTermClass.name}"
+       th:href="@{'/classes/' + ${currentTermClass.id}}"/>
+    <ul th:if="${#authorization.expression('hasAuthority(''teacher'')') && @termClassService.canUserEditTermClass(currentTermClass.id, currentUser)}">
+        <li class="nav-link text-light" th:text="'Invitation code: ' + ${currentTermClass.code}"></li>
+        <li><a class="nav-link text-light" th:text="|Students|"
+               th:href="@{'/classes/' + ${currentTermClass.id} + '/students'}"/></li>
+        <li><a class="nav-link text-light" th:text="|Create Document|"
+               th:href="@{'/classes/' + ${currentTermClass.id} + '/createDocument'}"/></li>
+    </ul>
+</div>
+
+</body>
+
+</html>
+

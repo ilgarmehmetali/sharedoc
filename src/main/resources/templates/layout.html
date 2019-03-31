@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+    <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Share Doc</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/webjars/bootstrap/4.3.0/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+</head>
+<body>
+<!--/* Standard layout can be mixed with Layout Dialect */-->
+<!--<div th:replace="fragments/header :: header">-->
+<!--</div>-->
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div  th:replace="fragments/sidebar :: sidebar">
+        </div>
+        <div class="col" id="main" layout:fragment="content" style="padding: 30px;">
+            <!-- ============================================================================ -->
+            <!-- This content is only used for static prototyping purposes (natural templates)-->
+            <!-- and is therefore entirely optional, as this markup fragment will be included -->
+            <!-- from "fragments/header.html" at runtime.                                     -->
+            <!-- ============================================================================ -->
+            <h1>Static content for prototyping purposes only</h1>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
+            Phasellus et placerat elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
+            Phasellus et placerat elit.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

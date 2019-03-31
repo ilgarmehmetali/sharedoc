@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<section layout:fragment="pageLinks" th:include="fragments/sidebar :: termClassSpecificPageLinks">
+</section>
+
+<section layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${'Students'}">Card title</h5>
+
+                    <ul>
+                        <li th:each="student : ${students}">
+                            <span class="text-dark" th:text="${student.displayName}"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+</body>
+</html>

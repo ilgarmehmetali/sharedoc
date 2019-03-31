@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<section layout:fragment="content">
+    <form method="POST" th:action="@{/classes/join}">
+        <span th:text="${message}"/>
+        <span th:text="${error}"/>
+
+        <h4>Join a class</h4>
+        <p>Invitation code: <input type="text" name="code" /></p>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </form>
+</section>
+</div>
+</body>
+</html>

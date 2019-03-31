@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<section layout:fragment="pageLinks" th:include="fragments/sidebar :: termClassSpecificPageLinks">
+</section>
+
+<section layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin: 20px;" th:each="document : ${documents}">
+                <div class="card-body">
+                    <a th:href="@{'/document/' + ${document.id}}"><h5 class="card-title" th:text="${document.title}">Card title</h5></a>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${document.posterUser.displayName}">Card subtitle</h6>
+                    <p class="card-text" th:text="${document.content}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary"  th:fragment="header">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+
+            <li sec:authorize="hasAuthority('teacher')" class="nav-item">
+                <a class="nav-link" th:href="@{/classes}" th:text="|Classes|" />
+            </li>
+
+        </ul>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+
+            <li sec:authorize="isAuthenticated()"  class="nav-item">
+                <span class="nav-link" th:text="${currentUser.username}" />
+            </li>
+
+            <li sec:authorize="isAuthenticated()" class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+
+            <li sec:authorize="!isAuthenticated()" class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+
+            <li sec:authorize="!isAuthenticated()" class="nav-item">
+                <a class="nav-link" th:href="@{/registration}">Register</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+</body>
+
+</html>
