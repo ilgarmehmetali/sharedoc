@@ -32,3 +32,5 @@ HELP.md
 *.code-workspace
 
 /bin
+
+.env

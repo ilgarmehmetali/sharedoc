@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - app-database
+    networks:
+      spring-boot-app-network:
+        aliases:
+          - app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://app-database/${DATABASE_NAME}
+      - SPRING_DATASOURCE_USERNAME=${DATABASE_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - ~/.gradle:/root/.gradle
+      - .:/app
+  app-database:
+    image: percona:5.6.40
+    networks:
+      spring-boot-app-network:
+        aliases:
+          - app-database
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MYSQL_ONETIME_PASSWORD=true
+networks:
+  spring-boot-app-network:
